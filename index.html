@@ -72,13 +72,14 @@ text-align: center;
 
   
 </style>
-
+<script>let submitted = false;</script>
+<iframe name="hidden_iframe" style="display:none;" onload="if(submitted){window.location='confirm.html';}"></iframe>
 
 </head>
 <body>
 
 
-<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse" method="POST">
+<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
 
 <div class="container">
 <div class="item"><label for="name">お名前</label></div>
@@ -99,6 +100,7 @@ text-align: center;
 <input type="submit">
 </div>
 </form>
+
 
 
 </body>
