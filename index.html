@@ -72,14 +72,14 @@ text-align: center;
 
   
 </style>
-<script>let submitted = false;</script>
-<iframe name="hidden_iframe" style="display:none;" onload="if(submitted){window.location='confirm.html';}"></iframe>
+
 
 </head>
 <body>
 
 
-<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse"
+  method="POST">
 
 <div class="container">
 <div class="item"><label for="name">お名前</label></div>
@@ -97,11 +97,40 @@ text-align: center;
 </div>
 
 <div class="button">
-<input type="submit">
+						<input id="js-submitButton" type="button">送信</button>
 </div>
 </form>
 
 
+<iframe name="hidden_iframe" id="hidden_iframe" scrolling="no" frameborder="no" style="display: none"></iframe>
 
+<script>
+  
+  $("#js-submitButton").on("click", event =>{
+	const form = $("#contact-form");
+	form.find('.invalid').removeClass('invalid');// 初期化
+
+	$('input[required]:invalid,textarea[required]:invalid').each(function(){// 項目が空だったらエラー表示をする
+		$(this).addClass('invalid');
+		$(this).next().addClass('invalid');
+	});
+
+	if($('.invalid').length == 0){
+		form.submit();
+		setTimeout(function(){
+			form[0].reset();　//フォーム送信時にリセットする
+			$(".end-message").slideDown();
+			$(".false-message").slideUp();
+		},500);
+	}else{
+		$(".end-message").slideUp();
+		$(".false-message").slideDown();
+	}
+
+	return false;
+});
+  
+</script>
+  
 </body>
 </html>
