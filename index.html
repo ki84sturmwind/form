@@ -79,7 +79,7 @@ text-align: center;
 
 
 <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse"
-  method="POST" target="hidden_iframe">
+  method="POST"  target="hidden_iframe" id="googleform">
 
 <div class="container">
 <div class="item"><label for="name">お名前</label></div>
@@ -97,36 +97,36 @@ text-align: center;
 </div>
 
 <div class="button">
-						<input type="submit">
+	<input type="button" value="送信" id="googleform-submit">
 </div>
 </form>
-<script>
-$(function(){
-$('#g-form').submit(function (event) {
-var formData = $('#g-form').serialize();
-$.ajax({
-  url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse",
-  data: formData,
-  type: "POST",
-  dataType: "xml",
-  statusCode: {
-    0: function(){
-      window.location.href = "confirm.html";
-      },
-    200: function(){
-     //失敗したときの処理
-      }
-    }
-  });
-//googleformへのページ遷移をキャンセル
-event.preventDefault();
-});
-});
+
+<p id="false-message"></p>
 	
+<script>
+$("#googleform-submit").on("click", event =>{
+	const form = $("#googleform");
+	form.find('.invalid').removeClass('invalid');// 初期化
+
+	$('input[required]:invalid,textarea[required]:invalid').each(function(){// 項目が空だったらエラー表示をする
+		$(this).addClass('invalid');
+		$(this).next().addClass('invalid');
+	});
+
+	if($('.invalid').length == 0){
+		form.submit();
+		window.location='confirm.html';
+		},500);
+	}else{
+		$("#false-message").text('未入力の項目があります');
+	}
+
+	return false;
+});
 
 </script>
 	
 
-<iframe name="hidden_iframe" id="hidden_iframe" scrolling="no" frameborder="no" style="display: none"></iframe>  
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>
 </html>
