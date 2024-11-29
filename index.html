@@ -97,37 +97,36 @@ text-align: center;
 </div>
 
 <div class="button">
-						<input id="js-submitButton" type="button" value="送信">
+						<input type="button">
 </div>
 </form>
 <script>
-	$("#js-submitButton").on("click", event =>{
-	const form = $("#contact-form");
-	form.find('.invalid').removeClass('invalid');// 初期化
-
-	$('input[required]:invalid,textarea[required]:invalid').each(function(){// 項目が空だったらエラー表示をする
-		$(this).addClass('invalid');
-		$(this).next().addClass('invalid');
-	});
-
-	if($('.invalid').length == 0){
-		form.submit();
-		setTimeout(function(){
-			form[0].reset();　//フォーム送信時にリセットする
-			$(".end-message").show();
-			$(".false-message").hide();
-		},500);
-	}else{
-		$(".end-message").hide();
-		$(".false-message").show();
-	}
-
-	return false;
+$(function(){
+$('#g-form').submit(function (event) {
+var formData = $('#g-form').serialize();
+$.ajax({
+  url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse",
+  data: formData,
+  type: "POST",
+  dataType: "xml",
+  statusCode: {
+    0: function(){
+      window.location.href = "confirm.html";
+      },
+    200: function(){
+     //失敗したときの処理
+      }
+    }
+  });
+//googleformへのページ遷移をキャンセル
+event.preventDefault();
 });
+});
+	
+
 </script>
 	
-<p class="end-message">お問い合わせありがとうございました</p>
-<p class="false-message">未入力の項目があります</p>
+
 <iframe name="hidden_iframe" id="hidden_iframe" scrolling="no" frameborder="no" style="display: none"></iframe>  
 </body>
 </html>
