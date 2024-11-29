@@ -79,7 +79,7 @@ text-align: center;
 
 
 <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfTYo5Q0AlRqoAJCgNY9k7HrDCxCxyiCkkSKfJYsIOUdGjlWw/formResponse"
-  method="POST">
+  method="POST" target="hidden_iframe">
 
 <div class="container">
 <div class="item"><label for="name">お名前</label></div>
@@ -101,10 +101,6 @@ text-align: center;
 </div>
 </form>
 <script>
-	$(function(){
-		$(".end-message").hide();
-		$(".false-message").hide();
-	});
 	$("#js-submitButton").on("click", event =>{
 	const form = $("#contact-form");
 	form.find('.invalid').removeClass('invalid');// 初期化
