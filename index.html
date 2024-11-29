@@ -9,10 +9,10 @@
 .container {
 display: grid;
 grid-template-columns: max-content 1fr;
-margin:5px;
+gap:10px;
 }
-.item{
-margin:10px;
+label{
+  vertical-align:middle;
 }
 input{
 width:100%;
@@ -35,13 +35,13 @@ overflow:auto;
 
 <div class="container">
 
-<div class="item"><label for="name">お名前</label></div>
+<div class="label"><label for="name">お名前</label></div>
 <div class="item"><input type="text" name="entry.819532097" id="name" required></div>
 
-<div class="item"><label for="mail">メールアドレス</label></div>
+<div class="label"><label for="mail">メールアドレス</label></div>
 <div class="item"><input id="mail" type="email" name="entry.1318234233" required></div>
 
-<div class="item"><label for="message">お問い合わせ内容</label></div>
+<div class="label"><label for="message">お問い合わせ内容</label></div>
 <div class="item"><textarea name="entry.433455472" id="message" required></textarea></div>
 
 </div>
