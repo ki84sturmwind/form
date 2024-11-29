@@ -101,6 +101,8 @@ text-align: center;
 </div>
 </form>
 <script>
+		$(".end-message").hide();
+		$(".false-message").hide();
 	$("#js-submitButton").on("click", event =>{
 	const form = $("#contact-form");
 	form.find('.invalid').removeClass('invalid');// 初期化
@@ -114,12 +116,12 @@ text-align: center;
 		form.submit();
 		setTimeout(function(){
 			form[0].reset();　//フォーム送信時にリセットする
-			$(".end-message").slideDown();
-			$(".false-message").slideUp();
+			$(".end-message").show();
+			$(".false-message").hide();
 		},500);
 	}else{
-		$(".end-message").slideUp();
-		$(".false-message").slideDown();
+		$(".end-message").hide();
+		$(".false-message").show();
 	}
 
 	return false;
